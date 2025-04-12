@@ -373,7 +373,7 @@ export interface ApiResumeResume extends Struct.CollectionTypeSchema {
   collectionName: 'resumes';
   info: {
     description: '';
-    displayName: 'Resume';
+    displayName: 'resume';
     pluralName: 'resumes';
     singularName: 'resume';
   };
@@ -381,22 +381,27 @@ export interface ApiResumeResume extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    contacts: Schema.Attribute.Component<'contact-card.contacts', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    html: Schema.Attribute.RichText;
+    education: Schema.Attribute.Component<'edu-card.edu-card', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::resume.resume'
     > &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.String;
+    name: Schema.Attribute.String;
+    personality: Schema.Attribute.Component<
+      'personality-card.personality-test',
+      false
+    >;
     publishedAt: Schema.Attribute.DateTime;
-    styles: Schema.Attribute.RichText;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    work_expirience: Schema.Attribute.Component<'work-card.work', true>;
   };
 }
 
