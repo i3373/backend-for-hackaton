@@ -2,6 +2,12 @@
  * resume router
  */
 
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreRouter('api::resume.resume');
+export default {
+  routes: [
+    {
+      method: 'GET',
+      path: '/resume/:id',
+      handler: 'resume.getResume',
+    },
+  ],
+};
