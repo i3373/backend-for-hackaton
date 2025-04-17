@@ -6,7 +6,7 @@ export default {
   routes: [
     {
       method: 'GET',
-      path: '/resume/:id',
+      path: '/resume',
       handler: 'resume.getResume',
     },
   ],

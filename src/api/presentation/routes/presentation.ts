@@ -11,7 +11,7 @@ export default {
     },
     {
       method: 'GET',
-      path: '/presentations/:id',
+      path: '/presentation',
       handler: 'presentation.findOne',
     },
   ],

@@ -9,10 +9,19 @@ export default {
     ctx.body = entry;
   },
   async findOne(ctx) {
-    const { id } = ctx.params;
-    const presentation = await strapi.entityService.findOne('api::presentation.presentation', id, 
-{ populate: { speakers: true } });
+    const { id } = ctx.query;
+    if (!id) {
+	const entry = await strapi.entityService.findOne('api::presentation.presentation', 1, 
+      { populate: { speakers: true } });
+    	ctx.body = entry;
+    } else {
+    const entry = await strapi.entityService.findOne('api::presentation.presentation', id, { populate: { speakers: true } });
 
-    ctx.body = presentation;
+    if (!entry) {
+      return ctx.notFound('Presentation not found');
+    }
+
+    ctx.body = entry;
+  }
   },
 };

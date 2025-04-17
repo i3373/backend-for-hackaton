@@ -4,7 +4,17 @@
 
 export default {
   async getResume(ctx) {
-    const { id } = ctx.params; 
+    const { id } = ctx.query; 
+    if (!id) {
+	const entry = await strapi.entityService.findOne('api::resume.resume', 1, {
+      populate: {
+  education: true,
+  work_expirience: true,
+  personality: true,
+  contacts: true
+}});
+    	ctx.body = entry;
+    } else {
     const entry = await strapi.entityService.findOne('api::resume.resume', id, {
       populate: {
   education: true,
@@ -18,6 +28,7 @@ export default {
     }
 
     ctx.body = entry;
+  }
 
   },
 };
