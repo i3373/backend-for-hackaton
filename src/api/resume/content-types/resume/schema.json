@@ -33,6 +33,12 @@
       "type": "component",
       "repeatable": false,
       "component": "contact-card.contacts"
+    },
+    "presentations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::presentation.presentation",
+      "mappedBy": "speakers"
     }
   }
 }
