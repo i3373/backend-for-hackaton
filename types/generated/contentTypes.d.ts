@@ -394,6 +394,7 @@ export interface ApiPresentationPresentation
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
+    preview: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
     speakers: Schema.Attribute.Relation<'manyToMany', 'api::resume.resume'>;
     updatedAt: Schema.Attribute.DateTime;
