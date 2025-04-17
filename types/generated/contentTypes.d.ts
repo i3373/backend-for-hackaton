@@ -369,6 +369,39 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPresentationPresentation
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'presentations';
+  info: {
+    description: '';
+    displayName: 'Presentation';
+    pluralName: 'presentations';
+    singularName: 'presentation';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    link: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::presentation.presentation'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    speakers: Schema.Attribute.Relation<'manyToMany', 'api::resume.resume'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiResumeResume extends Struct.CollectionTypeSchema {
   collectionName: 'resumes';
   info: {
@@ -396,6 +429,10 @@ export interface ApiResumeResume extends Struct.CollectionTypeSchema {
     personality: Schema.Attribute.Component<
       'personality-card.personality-test',
       false
+    >;
+    presentations: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::presentation.presentation'
     >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -914,6 +951,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::presentation.presentation': ApiPresentationPresentation;
       'api::resume.resume': ApiResumeResume;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
